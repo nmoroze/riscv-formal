@@ -28,7 +28,7 @@ groups = [None]
 blackbox = False
 
 cfgname = "checks"
-basedir = "%s/../.." % os.getcwd()
+basedir = "%s/.." % os.path.dirname(os.path.realpath(__file__))
 corename = os.getcwd().split("/")[-1]
 solver = "boolector"
 dumpsmt2 = False
@@ -333,7 +333,7 @@ def check_insn(grp, insn, chanidx, csr_mode=False):
                     print(line, file=sby_file)
 
 for grp in groups:
-    with open("../../insns/isa_%s.txt" % isa) as isa_file:
+    with open("%s/insns/isa_%s.txt" % (basedir, isa)) as isa_file:
         for insn in isa_file:
             for chanidx in range(nret):
                 check_insn(grp, insn.strip(), chanidx)
